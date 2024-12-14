@@ -1,0 +1,9 @@
+scikit-learn
+fastapi
+uvicorn
+numpy
+
+# MindSpore dependencies based on Python version
+mindspore @ https://ms-release.obs.cn-north-4.myhuaweicloud.com/2.4.1/MindSpore/unified/x86_64/mindspore-2.4.1-cp39-cp39-linux_x86_64.whl ; python_version == "3.9"
+mindspore @ https://ms-release.obs.cn-north-4.myhuaweicloud.com/2.4.1/MindSpore/unified/x86_64/mindspore-2.4.1-cp310-cp310-linux_x86_64.whl ; python_version == "3.10"
+mindspore @ https://ms-release.obs.cn-north-4.myhuaweicloud.com/2.4.1/MindSpore/unified/x86_64/mindspore-2.4.1-cp311-cp311-linux_x86_64.whl ; python_version == "3.11"
