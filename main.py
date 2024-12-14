@@ -3,7 +3,9 @@ import mindspore as ms
 from mindspore import nn, ops
 from mindspore.train.serialization import load_checkpoint, load_param_into_net
 import numpy as np
+import uvicorn
 import pickle
+import os
 
 # Load your encoders and scaler
 with open("soilcolor_encoder.pkl", "rb") as f:
@@ -48,14 +50,13 @@ net.set_train(False)  # inference mode
 
 app = FastAPI()
 
-
 @app.get("/predict")
 def predict(
-        Soilcolor: str,
-        T2M_MAX_W: float,
-        T2M_MIN_W: float,
-        QV2M_W: float,
-        PRECTOTCORR_W: float
+    Soilcolor: str,
+    T2M_MAX_W: float,
+    T2M_MIN_W: float,
+    QV2M_W: float,
+    PRECTOTCORR_W: float
 ):
     # Encode categorical feature
     soilcolor_val = soilcolor_encoder.transform([Soilcolor])[0]
@@ -75,3 +76,7 @@ def predict(
     predicted_label = label_encoder.inverse_transform([predicted_class])[0]
 
     return {"predicted_crop": predicted_label}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # Render sets PORT env variable
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
