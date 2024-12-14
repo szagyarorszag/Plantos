@@ -42,7 +42,7 @@ hidden_dim = 64
 net = MLP(input_dim, hidden_dim, num_classes)
 
 # Load model checkpoint
-param_dict = load_checkpoint("trained_model.ckpt")
+param_dict = load_checkpoint("trained_model_reduced.ckpt")
 load_param_into_net(net, param_dict)
 net.set_train(False)  # inference mode
 
